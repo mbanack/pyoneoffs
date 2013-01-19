@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+# whois-bulk.py
+#   Find the nameservers for a list of domains and output them
+#     as a csv.
+#   Note: this was only tuned for the WHOIS results I was getting
+#     90% of them had one format, and then the stragglers had a few
+#     different formats... your results may vary
 from subprocess import Popen,PIPE
 import re
 import time #whoosh

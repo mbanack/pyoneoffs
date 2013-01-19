@@ -1,5 +1,9 @@
 #!/usr/bin/python3
 # ./gwr2.py HOST PORT STREAM_PATH OUTFILE_PREFIX
+# ./gwr2.py ice.somafm.com 80 /groovesalad groovesalad
+#
+# generic web radio archiver
+#   Save streaming web radio in hourly chunks for later listening
 #
 # the idea here is .. if the net connection drops,
 #  we want to keep recording at some point.

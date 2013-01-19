@@ -1,4 +1,7 @@
 #!/usr/local/bin/python
+# pymxcheck.py
+#   Analyze sendmail's local-host-names file and determine
+#     which of those domains still have their MX pointed at the server
 import os
 
 lhnf = open('/etc/mail/local-host-names','r')
