@@ -2,6 +2,9 @@
 # whois-bulk.py
 #   Find the nameservers for a list of domains and output them
 #     as a csv.
+#   Keep requests under the WHOIS server's rate limit
+#     (mine was 4/min so I set it for 3 in case I did any auxiliary
+#       lookups while it was running)
 #   Note: this was only tuned for the WHOIS results I was getting
 #     90% of them had one format, and then the stragglers had a few
 #     different formats... your results may vary
