@@ -9,6 +9,7 @@ import time #whooosh
 import re
 import datetime
 import math
+import subprocess
 
 BAK_DIR = "/mnt/serverbak/automatic/sql/"
 
@@ -68,8 +69,18 @@ for file in os.listdir(BAK_DIR):
     if match:
         servername = match.group(1)
         date = match.group(2)
-        if date in keep_backups[servername]:
-            print("keeping " + file)
-        else:
-            print("PRUNING " + BAK_DIR + file)
+        if date not in keep_backups[servername]:
             os.unlink(BAK_DIR + file)
+
+# send a mail every sunday (through system MTA)
+today = datetime.date.today()
+if today.weekday() == 6:
+    mail_body = "SQL backup pruner run " + today.strftime("%A %B %d, %Y") + "\nThe following backups are being saved:\n\n"
+    for servername in keep_backups:
+        mail_body += servername + ": " + ",".join(keep_backups[servername]) + "\n"
+    mail_body += "\nBackups can be accessed at hypnos:/mnt/serverbak/automatic/sql"
+    recipient = 'hosting@22tech.com'
+    subject = 'SQL backup report ' + today.strftime("%b %d")
+    p = subprocess.Popen(["/usr/bin/mail", "-s", subject, recipient],
+			 stdin=subprocess.PIPE)
+    p.communicate(mail_body.encode())
