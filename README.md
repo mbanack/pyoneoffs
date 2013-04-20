@@ -12,3 +12,6 @@ pymxcheck.py
 
 whois-bulk.py
   * Find the nameservers for a list of domains, output as CSV... and stick to WHOIS server's rate limit
+
+prune\_old.py
+  * Keep daily, weekly, monthly, and yearly backups, delete all others
